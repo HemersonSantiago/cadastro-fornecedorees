@@ -27,7 +27,7 @@ const Listagem = () => {
   };
 
   const getLista = () => {
-    const lista = localStorage.getItem("lista-fornecedor") || [];
+    const lista = localStorage.getItem("lista-fornecedor") || "[]";
 
     const listaFornecedorParaJSON = JSON.parse(lista).map((item) => {
       const { endereco, ...rest } = item;
