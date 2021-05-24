@@ -38,7 +38,6 @@ const Listagem = () => {
   };
 
   useEffect(() => {
-    console.log("CHAMADOOOO");
     getLista();
   }, []);
 
@@ -104,14 +103,12 @@ const Listagem = () => {
       </Row>
       <Row gutter={20}>
         <Col md={24}>
-          <div>
-            
-          </div>
+          <div></div>
           <Table
             dataSource={listaFornecedor}
             columns={columns}
             bordered
-            rowKey={record => record.id}
+            rowKey={(record) => record.id}
             scroll={{ x: 1000 }}
             pagination={{ pageSize: 15 }}
           />

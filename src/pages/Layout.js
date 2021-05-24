@@ -4,27 +4,23 @@ import { Link } from "react-router-dom";
 import menu from "../contants/menu";
 
 import logoReduzido from "../assets/logo-reduzido.png";
-import logoDefault from "../assets/logo-default.png";
+import logoPadrao from "../assets/logo-default.png";
 
 const { Sider } = Layout;
 
 const Main = ({ children }) => {
-  const [collapsed, setCollapsed] = useState(false);
-
-  const onCollapse = (value) => {
-    setCollapsed(value);
-  };
+  const [colapsado, setColapsado] = useState(false);
 
   return (
     <Layout style={{ minHeight: "100vh" }}>
       <Sider
         collapsible
-        collapsed={collapsed}
-        onCollapse={value => onCollapse(value)}
+        collapsed={colapsado}
+        onCollapse={(value) => setColapsado(value)}
       >
-        <div className={collapsed ? "logo-reduced" : "logo-default"}>
+        <div className={colapsado ? "logo-reduced" : "logo-default"}>
           <Link to="/">
-            <img src={collapsed ? logoReduzido : logoDefault} alt="Logo" />
+            <img src={colapsado ? logoReduzido : logoPadrao} alt="Logo" />
           </Link>
         </div>
         <Menu theme="light" mode="inline">
