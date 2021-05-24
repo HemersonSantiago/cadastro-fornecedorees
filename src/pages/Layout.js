@@ -20,14 +20,14 @@ const Main = ({ children }) => {
       <Sider
         collapsible
         collapsed={collapsed}
-        onCollapse={(value) => onCollapse(value)}
+        onCollapse={value => onCollapse(value)}
       >
-        <div className={collapsed ? "logo-reduzido" : "logo-default"}>
+        <div className={collapsed ? "logo-reduced" : "logo-default"}>
           <Link to="/">
             <img src={collapsed ? logoReduzido : logoDefault} alt="Logo" />
           </Link>
         </div>
-        <Menu theme="dark" mode="inline">
+        <Menu theme="light" mode="inline">
           {menu.map((item, key) => (
             <>
               {item.disabled ? (

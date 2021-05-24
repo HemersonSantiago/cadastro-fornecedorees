@@ -1,3 +1,53 @@
+
+@font-face {
+  font-family: "Quicksand";
+  font-style: normal;
+  font-weight: 400;
+  src: url("./assets/fonts/Quicksand-Regular.ttf");
+}
+
+@font-face {
+  font-family: "Quicksand";
+  font-style: normal;
+  font-weight: 500;
+  src: url("./assets/fonts/Quicksand-Medium.ttf");
+}
+
+@font-face {
+  font-family: "Quicksand";
+  font-style: normal;
+  font-weight: 600;
+  src: url("./assets/fonts/Quicksand-SemiBold.ttf");
+}
+
+@font-face {
+  font-family: "Quicksand";
+  font-style: normal;
+  font-weight: 700;
+  src: url("./assets/fonts/Quicksand-Bold.ttf");
+}
+
+* {
+  font-family: "Quicksand";
+  font-weight: 400;
+}
+
+td {
+  font-weight: 500;
+}
+
+label, .ant-modal-confirm-content {
+  font-weight: 600;
+}
+
+.ant-table-thead th.ant-table-cell, .ant-modal-confirm-body-wrapper .ant-modal-confirm-body .ant-modal-confirm-title, .ant-drawer-header .ant-drawer-title {
+  font-weight: 700;
+}
+a, span {
+  font-weight: 900;;
+}
+
+
 .content {
   height: 150px;
   width: 100%;
@@ -37,6 +87,7 @@
 .align-content > p {
   margin: 1rem 0;
   text-align: center;
+  font-weight: 900;
 }
 @media (max-width: 800px) {
   .content {
@@ -73,8 +124,11 @@
   margin: 1rem 0;
   text-align: center;
   color: #000;
+}
+.title-home span {
   font-weight: 900;
 }
+
 .container-home {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
@@ -92,13 +146,24 @@
   }
 }
 
-.logo-reduzido img {
-  width: 80px;
-  height: auto;
+.ant-layout, .ant-layout * {
+  box-sizing: content-box !important;
+}
+.ant-layout-sider.ant-layout-sider-dark, .ant-menu.ant-menu-light {
+	background: #c5c9c7;
+
+}
+.logo-reduced img {
+  width: 79px;
 }
 
+.logo-default {
+  margin: 25px 0px;
+  display: flex;
+  justify-content: center;
+}
 .logo-default img {
-  width: 197px;
+  width: 170px;
   height: auto;
 }
 
@@ -118,8 +183,14 @@
 
 .title-info {
   color: #000;
-  font-size: 15px;
+  font-size: 17px;
   margin-bottom: 0.2rem;
+  font-weight: 600;
+}
+
+.content-info {
+  font-weight: 500;
+  font-size: 15px;
 }
 
 .button-details {

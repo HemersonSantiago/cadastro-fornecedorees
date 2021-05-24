@@ -61,7 +61,7 @@ const DrawerCadastroFornecedor = ({ visivel, fecharDrawer }) => {
 
   return (
     <Drawer
-      title="Cadastro de Fornecedor"
+      title={<h2>CADASTRO DE FORNECEDOR</h2>}
       placement="right"
       closable={false}
       keyboard={false}

@@ -7,7 +7,6 @@ const BoxMenu = ({ item }) => {
       className="content"
       style={{
         background: item.color,
-        border: "1px solid #d8d8d8",
         position: item.disabled ? "relative" : "",
       }}
     >
@@ -25,7 +24,7 @@ const BoxMenu = ({ item }) => {
           </div>
         </Link>
       ) : (
-        <span style={{ color: "#fff" }}>
+        <span style={{ color: item.disabled ? "#c8c8c1" : "#fff" }}>
           <div className="align-content">
             <span>{item.icon}</span>
             <p>{item.name}</p>

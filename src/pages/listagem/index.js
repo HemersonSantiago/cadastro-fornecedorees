@@ -111,7 +111,9 @@ const Listagem = () => {
             dataSource={listaFornecedor}
             columns={columns}
             bordered
-            rowKey={(record) => record.id}
+            rowKey={record => record.id}
+            scroll={{ x: 1000 }}
+            pagination={{ pageSize: 15 }}
           />
         </Col>
       </Row>
