@@ -2,7 +2,6 @@ import React from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 
 import Main from "./pages/main";
-import Cadastro from "./pages/cadastro";
 import Listagem from "./pages/listagem";
 
 
@@ -11,8 +10,7 @@ const Router = () => {
         <BrowserRouter>
             <Switch>
                 <Route path="/" exact component={Main} />
-                <Route path="/cadastro" exact component={Cadastro} />
-                <Route path="/listagem" exact component={Listagem} />
+                <Route path="/fornecedores" exact component={Listagem} />
             </Switch>
         </BrowserRouter>
     );

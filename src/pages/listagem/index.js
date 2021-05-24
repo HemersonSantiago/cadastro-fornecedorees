@@ -1,28 +1,50 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Layout from "../Layout";
-import { Table } from "antd";
+import { Row, Col, Button, Table } from "antd";
+import DrawerCadastroFornecedor from "./components/cadastro";
 import DrawerDetails from "./components/detalhes";
+import { SnippetsOutlined } from "@ant-design/icons";
 
 const Listagem = () => {
-  const [DrawerVisivel, setDrawerVisivel] = useState(true);
+  const [listaFornecedor, setListaFornecedor] = useState([]);
+
+  const [drawerCadastroFornecedor, setDrawerCadastroFornecedor] =
+    useState(false);
+
+  const [drawerDetalhesVisivel, setDrawerDetalhesVisivel] = useState(false);
   const [itemDrawer, setItemDrawer] = useState(null);
 
-  const mostrarDrawer = (item) => {
+  const fecharDrawerCadastro = () => setDrawerCadastroFornecedor(false);
+
+  const mostrarDrawerDetalhes = (item) => {
     setItemDrawer(item);
-    setDrawerVisivel(true);
+    setDrawerDetalhesVisivel(true);
   };
 
-  const fecharELimparDrawer = () => {
+  const fecharELimparDrawerDetalhes = () => {
     setItemDrawer(null);
-    setDrawerVisivel(false);
+    setDrawerDetalhesVisivel(false);
   };
 
-  const listaFornecedor = localStorage.getItem("lista-fornecedor") || [];
+  const getLista = () => {
+    const lista = localStorage.getItem("lista-fornecedor") || [];
 
-  const listaFornecedorParaJSON = JSON.parse(listaFornecedor).map((item) => {
-    const { endereco, ...rest } = item;
-    return { ...endereco, ...rest };
-  });
+    const listaFornecedorParaJSON = JSON.parse(lista).map((item) => {
+      const { endereco, ...rest } = item;
+      return { ...endereco, ...rest };
+    });
+
+    setListaFornecedor(listaFornecedorParaJSON);
+  };
+
+  useEffect(() => {
+    console.log("CHAMADOOOO");
+    getLista();
+  }, []);
+
+  useEffect(() => {
+    getLista();
+  }, [drawerCadastroFornecedor]);
 
   const columns = [
     {
@@ -55,23 +77,51 @@ const Listagem = () => {
       dataIndex: "id",
       key: "id",
       render: (id, record) => {
-        return <span onClick={() => mostrarDrawer(record)}>Detalhes</span>;
+        return (
+          <span
+            className="button-details"
+            onClick={() => mostrarDrawerDetalhes(record)}
+          >
+            <SnippetsOutlined /> Detalhes
+          </span>
+        );
       },
     },
   ];
 
   return (
     <Layout>
-      <Table
-        dataSource={listaFornecedorParaJSON}
-        columns={columns}
-        bordered
-        rowKey={(record) => record.id}
+      <Row gutter={20}>
+        <Col>
+          <Button
+            type="primary"
+            className="button-fornecedor"
+            onClick={() => setDrawerCadastroFornecedor(true)}
+          >
+            Cadastrar fornecedor
+          </Button>
+        </Col>
+      </Row>
+      <Row gutter={20}>
+        <Col md={24}>
+          <div>
+            
+          </div>
+          <Table
+            dataSource={listaFornecedor}
+            columns={columns}
+            bordered
+            rowKey={(record) => record.id}
+          />
+        </Col>
+      </Row>
+      <DrawerCadastroFornecedor
+        visivel={drawerCadastroFornecedor}
+        fecharDrawer={() => fecharDrawerCadastro()}
       />
-      ;
       <DrawerDetails
-        visivel={DrawerVisivel}
-        fecharDrawer={() => fecharELimparDrawer()}
+        visivel={drawerDetalhesVisivel}
+        fecharDrawer={() => fecharELimparDrawerDetalhes()}
         item={itemDrawer}
       />
     </Layout>

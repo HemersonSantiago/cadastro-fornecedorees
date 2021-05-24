@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Layout, Menu } from "antd";
 import { Link } from "react-router-dom";
-import { FileSearchOutlined, UserAddOutlined } from "@ant-design/icons";
+import menu from "../contants/menu";
 
 import logoReduzido from "../assets/logo-reduzido.png";
 import logoDefault from "../assets/logo-default.png";
@@ -27,13 +27,24 @@ const Main = ({ children }) => {
             <img src={collapsed ? logoReduzido : logoDefault} alt="Logo" />
           </Link>
         </div>
-        <Menu theme="dark" defaultSelectedKeys={["1"]} mode="inline">
-          <Menu.Item key="1" icon={<UserAddOutlined />}>
-            <Link to="/cadastro">Cadastro</Link>
-          </Menu.Item>
-          <Menu.Item key="2" icon={<FileSearchOutlined />}>
-            <Link to="/listagem">Listagem</Link>
-          </Menu.Item>
+        <Menu theme="dark" mode="inline">
+          {menu.map((item, key) => (
+            <>
+              {item.disabled ? (
+                <Menu.Item
+                  key={key}
+                  icon={item.smallIcon}
+                  disabled={item.disabled}
+                >
+                  <span>{item.name}</span>
+                </Menu.Item>
+              ) : (
+                <Menu.Item key={key} icon={item.smallIcon}>
+                  <Link to={item.to}>{item.name}</Link>
+                </Menu.Item>
+              )}
+            </>
+          ))}
         </Menu>
       </Sider>
       <Layout className="site-layout">{children}</Layout>

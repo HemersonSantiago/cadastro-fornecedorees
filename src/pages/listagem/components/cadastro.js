@@ -1,11 +1,10 @@
 import React, { useState } from "react";
-import Layout from "../Layout";
-import { Row, Col, Button, Form, Input, Modal } from "antd";
-import api from "../../services/api";
-import { requiredRule, emailType } from "../../utils/validateForm";
+import { Row, Col, Drawer, Button, Form, Input, Modal } from "antd";
+import api from "../../../services/api";
+import { requiredRule, emailType } from "../../../utils/validateForm";
 import { ExclamationCircleOutlined } from "@ant-design/icons";
 
-const Cadastro = () => {
+const DrawerCadastroFornecedor = ({ visivel, fecharDrawer }) => {
   const [form] = Form.useForm();
 
   const [statusCep, setStatusCep] = useState(undefined);
@@ -26,7 +25,7 @@ const Cadastro = () => {
       .catch(() => setStatusCep("error"));
   };
 
-  const confirmacaoFornecedor = fornecedor => {
+  const confirmacaoFornecedor = (fornecedor) => {
     Modal.confirm({
       title: "Cadastro de fornecedor",
       icon: <ExclamationCircleOutlined />,
@@ -34,13 +33,14 @@ const Cadastro = () => {
       okText: "Sim",
       cancelText: "Não",
       onOk() {
-        salvarFornecedor(fornecedor)
-      } 
+        salvarFornecedor(fornecedor);
+      },
     });
   };
 
-  const salvarFornecedor = fornecedor => {
-    const { cep, rua, numero, complemento, bairro, cidade, ...rest } = fornecedor;
+  const salvarFornecedor = (fornecedor) => {
+    const { cep, rua, numero, complemento, bairro, cidade, ...rest } =
+      fornecedor;
 
     const novoFornecedor = {
       endereco: { cep, rua, numero, complemento, bairro, cidade },
@@ -49,18 +49,28 @@ const Cadastro = () => {
 
     const listaFornecedor = JSON.parse(
       localStorage.getItem("lista-fornecedor") || "[]"
-    );;
-    
-    listaFornecedor.push({id: listaFornecedor.length + 1,...novoFornecedor});
+    );
+
+    listaFornecedor.push({ id: listaFornecedor.length + 1, ...novoFornecedor });
 
     localStorage.setItem("lista-fornecedor", JSON.stringify(listaFornecedor));
 
     form.resetFields();
+    fecharDrawer();
   };
 
   return (
-    <Layout>
-      <h1>Cadastro</h1>
+    <Drawer
+      title="Cadastro de Fornecedor"
+      placement="right"
+      closable={false}
+      keyboard={false}
+      maskClosable={false}
+      destroyOnClose={true}
+      onClose={fecharDrawer}
+      visible={visivel}
+      width={"80%"}
+    >
       <Form
         name="basic"
         form={form}
@@ -187,13 +197,24 @@ const Cadastro = () => {
         </Row>
 
         <Form.Item>
-          <Button type="primary" htmlType="submit">
-            Enviar
-          </Button>
+          <div className="grid-buttons">
+            <Row gutter={5}>
+              <Col md={12}>
+                <Button type="danger" onClick={fecharDrawer}>
+                  Cancelar
+                </Button>
+              </Col>
+              <Col md={12}>
+                <Button type="primary" htmlType="submit">
+                  Cadastrar
+                </Button>
+              </Col>
+            </Row>
+          </div>
         </Form.Item>
       </Form>
-    </Layout>
+    </Drawer>
   );
 };
 
-export default Cadastro;
+export default DrawerCadastroFornecedor;
