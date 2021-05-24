@@ -5,6 +5,8 @@
 * React Router Dom
 * Antd
 * Axios
+* Web Storage
+* Api de CEP
 
 
 ## Edited by:
